@@ -44,7 +44,7 @@ export function Sidebar() {
           <li>
             <a href='#'>
               <IceCreamIcon />
-              <span>Sorvetes</span>
+              <span>Sobremesas</span>
             </a>
           </li>
         </ul>
