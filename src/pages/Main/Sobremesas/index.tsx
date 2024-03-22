@@ -1,23 +1,13 @@
-import { useState, useEffect } from "react"
+import { useSnack } from "../../../hooks/useSnack"
 
 import Head from "../../../components/Head"
-import { SnackTitle } from "../../../components/SnackTitle"
 import { Snacks } from "../../../components/Snacks"
+import { SnackTitle } from "../../../components/SnackTitle"
 
-import { getSobremesas } from "../../../services/api"
-import { SnackData } from "../../../interfaces/SnackData"
+
 
 export default function Sobremesas() {
-  const [sobremesas, setSobremesas] = useState<SnackData[]>([])
-
-  useEffect(() => {
-    (async() => {
-      const sobremesaRequest = await getSobremesas()
-
-      setSobremesas(sobremesaRequest.data)
-    })()
-  },[]
-  )
+  const { sobremesas } = useSnack()
 
 
   return(
