@@ -3,25 +3,25 @@ import { SkeletonProps } from ".";
 
 const shimmerEffect = keyframes`
   0%{
-    background-possition: 0%;
+    background-position: 0%;
   }
   50%{
-    background-possition: -50%;
+    background-position: -50%;
   }
   75%{
-    background-possition: -125%;
+    background-position: -125%;
   }
   100%{
-    background-possition: -200%;
+    background-position: -200%;
   }
 `
 
 export const SkeletonElement = styled.div<SkeletonProps>`
   background: linear-gradient(
     90deg,
-    ${({ theme }) => theme.colors.white} 0%,
+    ${({ theme }) => theme.colors.red} 0%,
     #0a0a0a 40%,
-    ${({ theme }) => theme.colors.white} 100%,
+    ${({ theme }) => theme.colors.red} 100%
     );
 
     background-size: 200%;
