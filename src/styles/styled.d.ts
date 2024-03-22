@@ -5,6 +5,7 @@ declare module 'styled-components' {
     borderRadius?: string
 
     colors: {
+      maroon: string
       white: string
       black: string
       red: string
