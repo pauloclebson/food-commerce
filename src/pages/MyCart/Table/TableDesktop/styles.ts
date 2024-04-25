@@ -41,7 +41,21 @@ export const Container = styled.div`
         font-size: 1.5rem;
       }
 
-      /* Quantidade */
+      div{
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        button{
+          background: none;
+          flex: 0;
+          border: none;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
 
       h5{
         font-weight: 700;
