@@ -31,7 +31,7 @@ export const Container = styled.div`
       border-bottom: 1px solid ${({ theme }) => theme.colors.gray600};
 
       h4{
-        margin-bottom: 0%.5rem;
+        margin-bottom: 0.5rem;
         font-weight: 400;
         font-size: 1.125rem;
       }

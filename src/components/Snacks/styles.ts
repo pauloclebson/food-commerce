@@ -38,7 +38,7 @@ export const Container = styled.div`
 
         h2{
             margin-bottom: 0.75rem;
-            font-weigth: 700;
+            font-weight: 700;
             font-size: 1.5rem;
             text-align: center;
         }
