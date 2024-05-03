@@ -9,7 +9,7 @@ export const Container = styled.footer`
   justify-content: space-between;
 
   button{
-    background: ${({ theme }) => theme.colors.maroon};
+    background: ${({ theme }) => theme.colors.vermelho};
     width: 100%;
     max-width: 16.5rem;
     min-height: 4rem;
@@ -26,7 +26,7 @@ export const Container = styled.footer`
     transition: background 0.3s;
 
     &:hover{
-      background: ${darken(0.1, '#Ca0000')};
+      background: ${darken(0.1, '#AA2424')};
     }
   }
 

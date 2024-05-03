@@ -16,6 +16,7 @@ export const theme: DefaultTheme = {
     orange: '#E8590C',
     yellow: '#FCC419',
     maroon: '#800000',
+    vermelho: '#FF0000',
     green: '#23DB42',
     teal: '#89DD13',
     cyan: '#3BC9DB',
