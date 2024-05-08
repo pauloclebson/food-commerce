@@ -2,7 +2,7 @@
   "burgers": [
     {
       "id": 1,
-      "snack": "burger",
+      "snack": "Hamburguer",
       "name": "Mega",
       "description": "O artesanal tamanho família recheado com três carnes suculentas, queijo e bacon.",
       "price": 25.5,
@@ -10,7 +10,7 @@
     },
     {
       "id": 2,
-      "snack": "burger",
+      "snack": "Hamburguer",
       "name": "Extra Bacon",
       "description": "Criado para os amantes de bacon, possui em todas as suas camadas bacon bem assado e ainda queijo e carne.",
       "price": 23.5,
@@ -18,7 +18,7 @@
     },
     {
       "id": 3,
-      "snack": "burger",
+      "snack": "Hamburguer",
       "name": "Tradicional",
       "description": "O simples também é delicioso, principalmente se envolver nossa carne artesanal e queijo.",
       "price": 12,
@@ -26,7 +26,7 @@
     },
     {
       "id": 4,
-      "snack": "burger",
+      "snack": "Hamburguer",
       "name": "Big Carne",
       "description": "Uma carne artesanal de primeira qualidade com 4cm de altura e uma salada completa com alface, cebola, tomate e outros.",
       "price": 18.0,
@@ -34,7 +34,7 @@
     },
     {
       "id": 5,
-      "snack": "burger",
+      "snack": "Hamburguer",
       "name": "Carne dupla",
       "description": "Já pensou em comer aquele sanduíche com carne dupla e saborosa, recheada com queijo, molho e salada? Então você pensou exatamente nesse hambúrguer.",
       "price": 20,
@@ -120,7 +120,7 @@
   "bebidas": [
     {
       "id": 1,
-      "snack": "drink",
+      "snack": "Bebida",
       "name": "Coca-Cola 2L",
       "description": "A tradicional Coca-Cola que a família brasileira adora.",
       "price": 12,
@@ -128,7 +128,7 @@
     },
     {
       "id": 2,
-      "snack": "drink",
+      "snack": "Bebida",
       "name": "Guaraná Antarctica",
       "description": "O irresistível e saboroso Guaraná Antarctica em sua versão de latinha.",
       "price": 6.5,
@@ -136,7 +136,7 @@
     },
     {
       "id": 3,
-      "snack": "drink",
+      "snack": "Bebida",
       "name": "Suco de Abacaxi",
       "description": "Suco natural de abacaxi com leves incrementos de algumas hortaliças para fortificar sua saúde.",
       "price": 8,
@@ -144,7 +144,7 @@
     },
     {
       "id": 4,
-      "snack": "drink",
+      "snack": "Bebida",
       "name": "Suco de Laranja",
       "description": "Suco natural de laranja para você que é amante dessa fruta.",
       "price": 8,
@@ -155,7 +155,7 @@
   "sobremesas": [
     {
       "id": 1,
-      "snack": "ice-cream",
+      "snack": "Sorvete",
       "name": "Casquinha",
       "description": "A casquinha crocante e saborosa que nossos clientes amam.",
       "price": 4.5,
@@ -163,7 +163,7 @@
     },
     {
       "id": 2,
-      "snack": "ice-cream",
+      "snack": "Sorvete",
       "name": "Chocolate com granulado",
       "description": "Sorvete de chocolate com granulados em chocolate para você se deliciar.",
       "price": 6,
@@ -171,7 +171,7 @@
     },
     {
       "id": 3,
-      "snack": "ice-cream",
+      "snack": "Sorvete",
       "name": "Flocos",
       "description": "O tradicional flocos vem com cobertura em chocolate para adocicar seu dia.",
       "price": 7,
@@ -179,7 +179,7 @@
     },
     {
       "id": 4,
-      "snack": "ice-cream",
+      "snack": "Sorvete",
       "name": "Creme",
       "description": "O simples sorvete de creme com um gosto irresistível.",
       "price": 6.5,
@@ -187,7 +187,7 @@
     },
     {
       "id": 5,
-      "snack": "ice-cream",
+      "snack": "Sorvete",
       "name": "Morango",
       "description": "O clássico sorvete de morango que deixe tudo mais leve.",
       "price": 10,

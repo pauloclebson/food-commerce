@@ -12,9 +12,11 @@ export const theme: DefaultTheme = {
   colors: {
     white: '#FFFFFF',
     black: '#0C0D0F',
-    red: '#E03131',
+    red: '#FF6347',
     orange: '#E8590C',
     yellow: '#FCC419',
+    maroon: '#800000',
+    vermelho: '#FF0000',
     green: '#23DB42',
     teal: '#89DD13',
     cyan: '#3BC9DB',
@@ -55,6 +57,7 @@ export const theme: DefaultTheme = {
 
 interface ThemeProps {
   children: ReactNode
+
 }
 
 export function Theme({ children }: ThemeProps) {
