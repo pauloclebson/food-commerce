@@ -231,6 +231,23 @@ export default function Payment(){
           name="credit-card-number"
           autoComplete="cc-number"
           />
+            <Controller
+              name="creditCardNumber"
+              control={control}
+              render={({ field }) => (
+                <IMaskInput
+                  type="text"
+                  id="creditCardNumber"
+                  mask={[
+                    {mask: '0000 000000 0000', maxLength: 14},
+                    {mask: '0000 000000 00000', maxLength: 15},
+                    {mask: '0000 0000 0000 0000', },
+                  ]}
+                  {...field}
+                />
+              )}
+            />
+              {errors.creditCardNumber && <p className="error">{errors.creditCardNumber.message}</p>}
         </div>
 
         <div className="field">
