@@ -29,9 +29,27 @@ interface CartProviderProps{
 
 export const CartContext = createContext({} as CartContextProps)
 
+const localStorageKey = '@FoodCommerce:cart'
+
 export function CartProvider({ children }: CartProviderProps){
   const navigate = useNavigate()
-  const [cart, setCart] = useState<Snack[]>([])
+  const [cart, setCart] = useState<Snack[]>(() => {
+    const value = localStorage.getItem(localStorageKey)
+
+    if(value) return JSON.parse(value)
+
+    return []
+  })
+
+  function saveCart(items: Snack[]){
+    setCart(items)
+
+    localStorage.setItem(localStorageKey, JSON.stringify(items))
+  }
+
+  function clearCart(){
+    localStorage.removeItem(localStorageKey)
+  }
 
   function addSnackIntoCart(snack: SnackData): void{
     //buscar
@@ -51,7 +69,7 @@ export function CartProvider({ children }: CartProviderProps){
       })
 
       toast.success(`Outro(a) ${snackEmoji(snack.snack)} ${snack.name} adicionado no carrinho!`)
-      setCart(newCart)
+      saveCart(newCart)
       return
     }
 
@@ -62,13 +80,13 @@ export function CartProvider({ children }: CartProviderProps){
     console.log(`newCart adição`, newCart)
     toast.success(`${snackEmoji(snack.snack)} ${snack.name} adicionado no carrinho!`)
 
-    setCart(newCart)
+    saveCart(newCart)
   }
 
   function removeSnackFromCart(snack: Snack){
     const newCart = cart.filter((item) => !(item.id === snack.id && item.snack === snack.snack))
 
-    setCart(newCart)
+    saveCart(newCart)
   }
 
   function updateSnackQuantity(snack: Snack, newQuantity: number){
@@ -90,7 +108,7 @@ export function CartProvider({ children }: CartProviderProps){
       return item
     })
 
-    setCart(newCart)
+    saveCart(newCart)
   }
 
   function snackCartIncrement(snack: Snack){
@@ -107,6 +125,7 @@ export function CartProvider({ children }: CartProviderProps){
 
   function payOrder(customer: CustomerData) {
     console.log('payOrder', cart, customer)
+    clearCart() //deve ser executado após o retorno positivo da API
     //Chamada de API para o backend
     return
   }
