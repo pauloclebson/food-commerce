@@ -9,10 +9,7 @@ export const schema = yup
       .required('Nome e sobrenome são obrigatórios.')
       .min(4, 'Nome muito curto')
       .matches(/(\w.+\s).+/gi, 'O nome deve conter o sobrenome.'),
-    email: yup
-      .string()
-      .email('O email é obrigatório')
-      .required('O email deve ser válido.'),
+    email: yup.string().email('O email é obrigatório').required('O email deve ser válido.'),
     mobile: yup
       .string()
       .required('O celular é obrigatório.')
@@ -25,7 +22,8 @@ export const schema = yup
       .test(
         'validateDocument',
         'O CPF/CNPJ é inválido',
-        (value) => isValidCPF(value) || isValidCNPJ(value)),
+        (value) => isValidCPF(value) || isValidCNPJ(value),
+      ),
     zipCode: yup
       .string()
       .required('O CEP é obrigatório.')
@@ -37,10 +35,14 @@ export const schema = yup
     city: yup.string().required('A cidade é obrigatória.'),
     state: yup.string().required('O estado é obrigatório.'),
     creditCardNumber: yup
-      .string().required('O número do cartão é obrigatório.')
+      .string()
+      .required('O número do cartão é obrigatório.')
       .transform((value) => value.replace(/[^\d]/g, ''))
-      .test('validateCreditCardNumber', 'O número do cartão é inválido.',
-      (value) => isValidCreditCard.number(value).isValid),
+      .test(
+        'validateCreditCardNumber',
+        'O número do cartão é inválido.',
+        (value) => isValidCreditCard.number(value).isValid,
+      ),
     creditCardHolder: yup
       .string()
       .required('O nome titular é obrigatório.')
@@ -52,18 +54,22 @@ export const schema = yup
       .transform((value) => {
         const [month, year] = value.split('/')
 
-        if(month && year && month.length === 2 && year.length === 2)
-          return new Date(+`20${year}`, + month - 1, 1).toISOString()
+        if (month && year && month.length === 2 && year.length === 2)
+          return new Date(+`20${year}`, +month - 1, 1).toISOString()
 
         return value
-      }).test('validateCreditCardExpiration', 'A data de validade é inválida.', (value) => new Date(value) >= new Date(),),
+      })
+      .test(
+        'validateCreditCardExpiration',
+        'A data de validade é inválida.',
+        (value) => new Date(value) >= new Date(),
+      ),
     creditCardSecurityCode: yup
       .string()
       .required('O CVV é obrigatório.')
       .transform((value) => value.replace(/[^\d]+/g, ''))
       .min(3, 'O CVV deve possuir entre 3 e 4 dígitos.')
       .max(4, 'O CVV deve possuir entre 3 e 4 dígitos.'),
-
   })
   .required()
 
