@@ -5,14 +5,11 @@ import { SnackData } from '../interfaces/SnackData'
 
 import { snackEmoji } from '../helpers/snackEmoji'
 import { CustomerData } from '../interfaces/CustomerData'
+import { Snack } from '../interfaces/Snack'
+import { processCheckout } from '../services/api'
+import { error } from 'console'
 
-interface Snack extends SnackData{
-  quantity: number
-  subtotal: number
-}
-
-
-interface CartContextProps{
+interface CartContextProps {
   cart: Snack[]
   addSnackIntoCart: (snack: SnackData) => void
   removeSnackFromCart: (snack: Snack) => void
@@ -23,7 +20,7 @@ interface CartContextProps{
   // updateCart: ({ id, snack, newQuantity }: UpdateCartProps) => void
 }
 
-interface CartProviderProps{
+interface CartProviderProps {
   children: ReactNode
 }
 
@@ -31,34 +28,36 @@ export const CartContext = createContext({} as CartContextProps)
 
 const localStorageKey = '@FoodCommerce:cart'
 
-export function CartProvider({ children }: CartProviderProps){
+export function CartProvider({ children }: CartProviderProps) {
   const navigate = useNavigate()
   const [cart, setCart] = useState<Snack[]>(() => {
     const value = localStorage.getItem(localStorageKey)
 
-    if(value) return JSON.parse(value)
+    if (value) return JSON.parse(value)
 
     return []
   })
 
-  function saveCart(items: Snack[]){
+  function saveCart(items: Snack[]) {
     setCart(items)
 
     localStorage.setItem(localStorageKey, JSON.stringify(items))
   }
 
-  function clearCart(){
+  function clearCart() {
     localStorage.removeItem(localStorageKey)
   }
 
-  function addSnackIntoCart(snack: SnackData): void{
+  function addSnackIntoCart(snack: SnackData): void {
     //buscar
-    const snackExistentInCart = cart.find(( item ) => item.snack === snack.snack && item.id === snack.id)
+    const snackExistentInCart = cart.find(
+      (item) => item.snack === snack.snack && item.id === snack.id,
+    )
 
     //atualizar
-    if(snackExistentInCart){
-      const newCart = cart.map((item)=> {
-        if(item.id === snack.id){
+    if (snackExistentInCart) {
+      const newCart = cart.map((item) => {
+        if (item.id === snack.id) {
           const quantity = item.quantity + 1
           const subtotal = item.price * quantity
 
@@ -74,7 +73,7 @@ export function CartProvider({ children }: CartProviderProps){
     }
 
     //adicionar
-    const newSnack = { ...snack, quantity: 1, subtotal: snack.price}
+    const newSnack = { ...snack, quantity: 1, subtotal: snack.price }
     const newCart = [...cart, newSnack]
 
     console.log(`newCart adição`, newCart)
@@ -83,22 +82,24 @@ export function CartProvider({ children }: CartProviderProps){
     saveCart(newCart)
   }
 
-  function removeSnackFromCart(snack: Snack){
+  function removeSnackFromCart(snack: Snack) {
     const newCart = cart.filter((item) => !(item.id === snack.id && item.snack === snack.snack))
 
     saveCart(newCart)
   }
 
-  function updateSnackQuantity(snack: Snack, newQuantity: number){
-    if(newQuantity <= 0) return
+  function updateSnackQuantity(snack: Snack, newQuantity: number) {
+    if (newQuantity <= 0) return
 
-    const snackExistentInCart = cart.find((item) => item.id === snack.id && item.snack === snack.snack)
+    const snackExistentInCart = cart.find(
+      (item) => item.id === snack.id && item.snack === snack.snack,
+    )
 
-    if(!snackExistentInCart) return
+    if (!snackExistentInCart) return
 
     const newCart = cart.map((item) => {
-      if(item.id === snackExistentInCart.id && item.snack === snackExistentInCart.snack){
-        return{
+      if (item.id === snackExistentInCart.id && item.snack === snackExistentInCart.snack) {
+        return {
           ...item,
           quantity: newQuantity,
           subtotal: item.price * newQuantity,
@@ -111,11 +112,11 @@ export function CartProvider({ children }: CartProviderProps){
     saveCart(newCart)
   }
 
-  function snackCartIncrement(snack: Snack){
+  function snackCartIncrement(snack: Snack) {
     updateSnackQuantity(snack, snack.quantity + 1)
   }
 
-  function snackCartDecrement(snack: Snack){
+  function snackCartDecrement(snack: Snack) {
     updateSnackQuantity(snack, snack.quantity - 1)
   }
 
@@ -123,25 +124,38 @@ export function CartProvider({ children }: CartProviderProps){
     navigate('/payment')
   }
 
-  function payOrder(customer: CustomerData) {
-    console.log('payOrder', cart, customer)
-    clearCart() //deve ser executado após o retorno positivo da API
-    //Chamada de API para o backend
+  async function payOrder(customer: CustomerData) {
+    //chamada da API para o backend
+    try {
+      const response = await processCheckout(cart, customer)
+      if (response.data.status !== 'PAID') {
+        toast.error('Erro ao processar o pagamento, por favor, tente novamente mais tarde.')
+        return
+      }
+
+      clearCart() //deve ser executado após o retorno positivo da API
+
+      navigate(`/order/success/${response.data.id}`)
+    } catch (error) {
+      console.error(error)
+      toast.error('Erro ao processar o pedido')
+    }
+
     return
   }
 
-
-
-  return(
-    <CartContext.Provider value={{
-      cart,
-      addSnackIntoCart,
-      removeSnackFromCart,
-      snackCartIncrement,
-      snackCartDecrement,
-      confirmOrder,
-      payOrder,
-      }}>
+  return (
+    <CartContext.Provider
+      value={{
+        cart,
+        addSnackIntoCart,
+        removeSnackFromCart,
+        snackCartIncrement,
+        snackCartDecrement,
+        confirmOrder,
+        payOrder,
+      }}
+    >
       {children}
     </CartContext.Provider>
   )
