@@ -12,9 +12,9 @@ const api = axios.create({
 //https://seusite.com.br/api/sobremesas
 
 
-export const getBurgers = () => api.get<SnackData[]>('/burgers')
-export const getPizzas = () => api.get<SnackData[]>('/pizzas')
-export const getBebidas = () => api.get<SnackData[]>('/bebidas')
-export const getSobremesas = () => api.get<SnackData[]>('/sobremesas')
+export const getBurgers = () => api.get<SnackData[]>('/snacks?snack=burger')
+export const getPizzas = () => api.get<SnackData[]>('/snacks?snack=pizza')
+export const getBebidas = () => api.get<SnackData[]>('/snacks?snack=drink')
+export const getSobremesas = () => api.get<SnackData[]>('/snacks?snack=ice-cream')
 
 export default api
